@@ -70,6 +70,10 @@ __C.TEST = edict()
 __C.TEST.RPN_PRE_NMS_TOP_N = 6000
 __C.TEST.RPN_POST_NMS_TOP_N = 300
 __C.TEST.RPN_NMS_THRESH = 0.7
+__C.TEST.MODE = 'nms'
+__C.TEST.SCALES = (600,)
+__C.TEST.MAX_SIZE = 1000
+__C.TEST.BBOX_REG = True
 
 __C.ROOT_DIR = osp.abspath(osp.join(osp.dirname(__file__), '..'))
 __C.DATA_DIR = osp.abspath(osp.join(__C.ROOT_DIR, 'data'))
@@ -83,6 +87,8 @@ __C.PIXEL_MEANS = np.array([[[102.9801, 115.9465, 122.7717]]])
 __C.RNG_SEED = 3
 __C.POOLING_MODE = 'crop'
 __C.POOLING_SIZE = 7
+
+__C.USE_GPU_NMS = True
 
 __C.RESNET = edict()
 __C.RESNET.MAX_POOL = False

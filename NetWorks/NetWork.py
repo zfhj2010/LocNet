@@ -442,3 +442,14 @@ class basenet(object):
                                                                                     feed_dict=feed_dict)
         return rpn_loss_cls, rpn_loss_box, loss_cls, loss_box, loss, summary
 
+    def test_image(self, sess, image, im_info):
+        feed_dict = {self._image: image,
+                     self._im_info: im_info}
+
+        cls_score, cls_prob, bbox_pred, rois = sess.run([self._predictions["cls_score"],
+                                                         self._predictions['cls_prob'],
+                                                         self._predictions['bbox_pred'],
+                                                         self._predictions['rois']],
+                                                        feed_dict=feed_dict)
+        return cls_score, cls_prob, bbox_pred, rois
+

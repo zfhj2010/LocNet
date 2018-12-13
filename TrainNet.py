@@ -24,7 +24,7 @@ class SolverWrapper(object):
         self.roidb = roidb
         self.output_dir = output_dir
         self.tb_dir = tb_dir
-        self.pretrained_model = pretrained_model
+        self.pretrained_model = os.path.join(cfg.DATA_DIR, 'weights', pretrained_model)
 
     def initialize(self, sess):
         # Initial file lists are empty
