@@ -16,7 +16,6 @@ class coco(imdb):
         self._data_path = osp.join(cfg.DATA_DIR, 'coco')
         self._year = dataset[-4:]
         self._mode = mode
-        self._dataset = dataset
         self._COCO = COCO(self._get_ann_file())
         cats = self._COCO.loadCats(self._COCO.getCatIds())
         self._classes = tuple(['__background__'] + [c['name'] for c in cats])
@@ -77,6 +76,11 @@ class coco(imdb):
 
         gt_roidb = [self._load_coco_annotation(index) for index in self._image_index]
 
+        with open(cache_file, 'wb') as fid:
+            pickle.dump(gt_roidb, fid, pickle.HIGHEST_PROTOCOL)
+        print('wrote gt roidb to {}'.format(cache_file))
+        return gt_roidb
+
     def _load_coco_annotation(self, index):
         im_ann = self._COCO.loadImgs(index)[0]
         width = im_ann['width']
@@ -118,6 +122,13 @@ class coco(imdb):
 
         validate_boxes(boxes, width=width, height=height)
         overlaps = scipy.sparse.csr_matrix(overlaps)
+        return {'width': width,
+                'height': height,
+                'boxes': boxes,
+                'gt_classes': gt_classes,
+                'gt_overlaps': overlaps,
+                'flipped': False,
+                'seg_areas': seg_areas}
 
 
 

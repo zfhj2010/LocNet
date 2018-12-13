@@ -1,5 +1,6 @@
 from Config.Settings import cfg
 from DataSet.Coco import coco
+from RoiLayer.Roidb import prepare_roidb
 
 _Sets = {}
 
@@ -17,5 +18,11 @@ def get_imdb(mode, dataset):
 
 def get_roidb(imdb):
     if cfg.TRAIN.USE_FLIPPED:
+        print('append horizontally-flipped training data')
         imdb.append_flipped_images()
+        print('append done')
+    print('prepare training data')
+    prepare_roidb(imdb)
+    print('prepare done')
+    return imdb.roidb
 

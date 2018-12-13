@@ -6,10 +6,15 @@ from Config.Settings import cfg
 
 class imdb(object):
     def __init__(self, mode, dataset):
+        self._dataset = dataset
         self._classes = []
         self._image_index = []
         self._roidb = None
         self._roidb_handler = self.default_roidb
+
+    @property
+    def dataset(self):
+        return self._dataset
 
     @property
     def num_classes(self):
@@ -22,6 +27,10 @@ class imdb(object):
     @property
     def num_images(self):
         return len(self._image_index)
+
+    @property
+    def image_index(self):
+        return self._image_index
 
     @property
     def roidb(self):
