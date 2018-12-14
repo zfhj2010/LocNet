@@ -10,6 +10,7 @@ from NetWorks.Vgg16 import vgg16
 from NetWorks.ResNet_V1 import resnetv1
 from Utils.Blob import im_list_to_blob
 from Utils.NMSWrapper import nms
+from Utils.MyNMS import zsoft_nms
 from Utils.BBoxTransform import clip_boxes, bbox_transform_inv
 
 
@@ -125,7 +126,8 @@ def test_process(mode, net_name, dataset, pretrained_model, image_path):
     cls_boxes = boxes[:, 4 * cls_ind:4 * (cls_ind + 1)]
     cls_scores = scores[:, cls_ind]
     dets = np.hstack((cls_boxes, cls_scores[:, np.newaxis])).astype(np.float32)
-    keep = nms(dets, NMS_THRESH)
+    # keep = nms(dets, NMS_THRESH)
+    keep = zsoft_nms(dets, NMS_THRESH)
     dets = dets[keep, :]
     real_inds = np.where(dets[:, -1] >= CONF_THRESH)[0]
     if len(real_inds) == 0:

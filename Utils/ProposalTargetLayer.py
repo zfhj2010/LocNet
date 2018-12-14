@@ -101,6 +101,7 @@ def _sample_rois(all_rois, all_scores, gt_boxes, fg_rois_per_image, rois_per_ima
         fg_rois_per_image = 0
     else:
         import pdb
+        print('error, bg_inds={:d}, fg_inds={:d}'.format(bg_inds.size, fg_inds.size))
         pdb.set_trace()
 
     # The indices that we're selecting (both fg and bg)
