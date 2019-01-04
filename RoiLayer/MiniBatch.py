@@ -36,6 +36,8 @@ def get_minibatch(roidb, num_classes):
         [im_blob.shape[1], im_blob.shape[2], im_scales[0]],
         dtype=np.float32)
 
+    blobs['image_name'] = roidb[0]['image']
+
     return blobs
 
 

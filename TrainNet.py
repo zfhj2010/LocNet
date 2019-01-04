@@ -184,6 +184,10 @@ class SolverWrapper(object):
             # Get training data, one batch at a time
             blobs = self.data_layer.forward()
 
+            # print('iter={:d}, file_name={:s}'.format(iter, blobs['image_name']))
+            if '000000076627.jpg' in blobs['image_name']:
+                continue
+
             now = time.time()
             if iter == 1 or now - last_summary_time > cfg.TRAIN.SUMMARY_INTERVAL:
                 # Compute the graph with summary

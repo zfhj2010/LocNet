@@ -236,8 +236,8 @@ class basenet(object):
                                          weights_initializer=initializer,
                                          trainable=is_training,
                                          activation_fn=None, scope='cls_score')
-        cls_prob = self._softmax_layer(cls_score, "cls_prob")
-        cls_pred = tf.argmax(cls_score, axis=1, name="cls_pred")
+        cls_prob = self._softmax_layer(cls_score, 'cls_prob')
+        cls_pred = tf.argmax(cls_score, axis=1, name='cls_pred')
         bbox_pred = slim.fully_connected(fc7, self._num_classes * 4,
                                          weights_initializer=initializer_bbox,
                                          trainable=is_training,
@@ -458,7 +458,7 @@ class basenet(object):
         feed_dict = {self._image: image,
                      self._im_info: im_info}
 
-        cls_score, cls_prob, bbox_pred, rois = sess.run([self._predictions["cls_score"],
+        cls_score, cls_prob, bbox_pred, rois = sess.run([self._predictions['cls_score'],
                                                          self._predictions['cls_prob'],
                                                          self._predictions['bbox_pred'],
                                                          self._predictions['rois']],

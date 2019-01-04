@@ -115,6 +115,11 @@ def test_process(mode, net_name, dataset, pretrained_model, image_path):
     im = cv2.imread(image_path)
     scores, boxes = im_detect(sess, net, im)
 
+    # saver = tf.train.Saver()
+    # save_path = osp.join(output_dir, 'test', 'model.ckpt')
+    # saver.save(sess, save_path)
+
+
     CONF_THRESH = 0.8
     NMS_THRESH = 0.3
 
